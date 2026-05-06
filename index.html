@@ -1924,6 +1924,9 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 
 <script>
   // ─── Reveal on scroll (skip hero so first paint isn't blank) ───
+  // Use threshold:0 — sections taller than viewport/0.12 (~7000px on mobile)
+  // can never reach a 12% visibility ratio, so they'd stay invisible. rootMargin
+  // delays the trigger until ~10% into the viewport for a calmer entrance.
   const reveal = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1931,7 +1934,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         reveal.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('section:not(#hero), .pull-quote, .carousel-simulator').forEach(el => {
     el.classList.add('reveal'); reveal.observe(el);
   });
