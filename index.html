@@ -278,7 +278,7 @@ a { color: inherit; text-decoration: none; }
 .cronograma { background: var(--void); }
 .timeline {
   display: grid;
-  grid-template-columns: 280px repeat(8, 1fr);
+  grid-template-columns: 280px repeat(6, 1fr);
   gap: 0;
   margin-top: 72px;
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -334,7 +334,7 @@ a { color: inherit; text-decoration: none; }
   outline: 2px solid var(--yellow);
 }
 @media (max-width: 1000px) {
-  .timeline { grid-template-columns: 180px repeat(8, minmax(60px, 1fr)); overflow-x: auto; }
+  .timeline { grid-template-columns: 180px repeat(6, minmax(60px, 1fr)); overflow-x: auto; }
   .tl-row > .tl-label { font-size: 12px; padding: 16px 8px; }
 }
 
@@ -710,7 +710,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 }
 .year-strip {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 4px;
   margin-bottom: 12px;
 }
@@ -727,7 +727,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 }
 .year-cell.anchor .dot { background: var(--void); }
 .year-labels {
-  display: grid; grid-template-columns: repeat(8, 1fr);
+  display: grid; grid-template-columns: repeat(6, 1fr);
   gap: 4px;
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
   font-weight: 500; color: var(--grey-dim); text-align: center;
@@ -746,7 +746,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   .resumen-grid { grid-template-columns: 1fr; gap: 32px; }
   .resumen-cards { grid-template-columns: 1fr; }
   .resumen-lead { font-size: 22px; margin-bottom: 36px; }
-  .year-strip, .year-labels { grid-template-columns: repeat(4, 1fr); }
+  .year-strip, .year-labels { grid-template-columns: repeat(3, 1fr); }
   .year-cell { height: 36px; }
   .resumen-shape { padding: 24px 20px; }
 }
@@ -773,6 +773,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
   font-weight: 900; color: var(--yellow);
 }
+.rec-tagline.decided::after { content: '✓ Decisión tomada'; }
 .rec-rationale {
   font-size: 13px; color: rgba(255,255,255,0.62);
   font-weight: 500; line-height: 1.55;
@@ -1007,7 +1008,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <!-- Top bar (desktop) -->
 <div class="topbar">
   <div class="brand">Propuesta de campaña · OMG 25</div>
-  <div>v2.5 · Mayo 2026</div>
+  <div>v3.0 · Julio 2026</div>
 </div>
 
 <!-- Mobile nav (≤1100px) -->
@@ -1027,13 +1028,13 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <a href="#intro"><span class="mnum">03</span><span>El argumento</span></a>
     <a href="#familia"><span class="mnum">04</span><span>Por qué solo OMG</span></a>
     <a href="#legado"><span class="mnum">05</span><span>Legado</span></a>
-    <a href="#lanzamiento"><span class="mnum">06</span><span>Lanzamiento · 11 mayo</span></a>
+    <a href="#lanzamiento"><span class="mnum">06</span><span>Lanzamiento · Julio</span></a>
     <a href="#layer1"><span class="mnum">07</span><span>Layer 1 — El malentendido</span></a>
     <a href="#layer2"><span class="mnum">08</span><span>Layer 2 — Presencia silenciosa</span></a>
     <a href="#layer3"><span class="mnum">09</span><span>Layer 3 — Definición imposible</span></a>
     <a href="#complementarias"><span class="mnum">10</span><span>Series complementarias</span></a>
     <a href="#adapt"><span class="mnum">11</span><span>Adaptaciones</span></a>
-    <a href="#decisiones"><span class="mnum">12</span><span>Decisiones requeridas</span></a>
+    <a href="#decisiones"><span class="mnum">12</span><span>Decisiones</span></a>
     <a href="#sistema"><span class="mnum">13</span><span>Sistema visual</span></a>
     <a href="#cierre"><span class="mnum">14</span><span>Cierre</span></a>
   </div>
@@ -1059,7 +1060,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <a href="#sistema" data-rail><span class="rn">13</span><span>Sistema visual</span></a>
     <a href="#cierre" data-rail><span class="rn">14</span><span>Cierre</span></a>
   </div>
-  <div class="rail-foot">15 secciones · <strong>Mayo–Dic 2026</strong></div>
+  <div class="rail-foot">15 secciones · <strong>Julio–Dic 2026</strong></div>
 </aside>
 
 <!-- (legacy dot nav removed — replaced by progress rail above) -->
@@ -1070,7 +1071,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <!-- ══════ HERO (00) ══════ -->
 <section class="hero" id="hero">
   <div class="hero-left">
-    <div class="eyebrow">Propuesta de campaña, mayo–dic 2026</div>
+    <div class="eyebrow">Propuesta de campaña, julio–dic 2026</div>
     <h1><em style="font-style:normal; color:var(--white)">OMG</em><br><span class="accent">25 Aniversario.</span></h1>
   </div>
   <div class="hero-right">
@@ -1096,7 +1097,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="rcard">
           <div class="rtag">La estructura</div>
           <div class="rval">3 <span class="accent">Layers</span></div>
-          <div class="rdesc">Layer 1: el malentendido (mayo–ago). Layer 2: la presencia silenciosa (jul–sep). Layer 3: la definición imposible (ago–sep).</div>
+          <div class="rdesc">Layer 1: el malentendido (jul–sep). Layer 2: la presencia silenciosa (ago–oct). Layer 3: la definición imposible (sep–oct).</div>
         </div>
         <div class="rcard">
           <div class="rtag">El legado</div>
@@ -1106,25 +1107,24 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       </div>
 
       <div class="resumen-shape">
-        <div class="stitle"><span>Forma del año</span><span class="right">Mayo → Diciembre 2026</span></div>
+        <div class="stitle"><span>Forma del año</span><span class="right">Julio → Diciembre 2026</span></div>
         <div class="year-strip">
           <div class="year-cell has-event"><div class="dot"></div></div>
           <div class="year-cell has-event"></div>
-          <div class="year-cell has-event"></div>
-          <div class="year-cell has-event"><div class="dot"></div></div>
           <div class="year-cell anchor"><div class="dot"></div></div>
-          <div class="year-cell has-event"></div>
+          <div class="year-cell has-event"><div class="dot"></div></div>
           <div class="year-cell has-event"></div>
           <div class="year-cell has-event"></div>
         </div>
         <div class="year-labels">
-          <span>May</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dic</span>
+          <span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dic</span>
         </div>
         <div class="year-events">
-          <span><strong>11 May</strong> · Lanzamiento</span>
-          <span><strong>Jun</strong> · Estudios de Caso RD + Podcast LMG</span>
-          <span><strong>Ago</strong> · Video síntesis</span>
+          <span><strong>Jul</strong> · Lanzamiento</span>
+          <span><strong>Jul</strong> · Estudios de Caso RD</span>
+          <span><strong>Ago</strong> · Podcast LMG</span>
           <span><em>Sep</em> · Graduación IOMG · momento ancla</span>
+          <span><strong>Oct</strong> · Síntesis + video</span>
           <span><strong>Dic</strong> · Cierre</span>
         </div>
       </div>
@@ -1148,31 +1148,28 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <!-- header row -->
       <div class="tl-header">
         <div>Iniciativa</div>
-        <div>May</div><div>Jun</div><div>Jul</div><div>Ago</div>
-        <div>Sep</div><div>Oct</div><div>Nov</div><div>Dic</div>
+        <div>Jul</div><div>Ago</div><div>Sep</div>
+        <div>Oct</div><div>Nov</div><div>Dic</div>
       </div>
       <!-- Lanzamiento -->
       <div class="tl-row">
-        <div class="tl-label">Lanzamiento<span class="sub">11 mayo</span></div>
+        <div class="tl-label">Lanzamiento<span class="sub">Julio</span></div>
         <div class="tl-cell"><div class="tl-dot"></div></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div>
         <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
       <!-- Nos han llamado -->
       <div class="tl-row">
         <div class="tl-label">Nos han llamado…<span class="sub">Layer 1 · 7 + remate</span></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
       <!-- Estudios de Caso RD -->
       <div class="tl-row">
         <div class="tl-label">Estudios de Caso RD<span class="sub">Legado · publicación</span></div>
-        <div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
@@ -1187,40 +1184,37 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
       </div>
       <!-- Estuvimos ahí -->
       <div class="tl-row">
         <div class="tl-label">Estuvimos ahí<span class="sub">Layer 2 · ~8 piezas</span></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
+        <div class="tl-cell"></div>
+        <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
       <!-- Así nos describió -->
       <div class="tl-row">
         <div class="tl-label">Así nos describió<span class="sub">Complementaria · ~8 piezas</span></div>
         <div class="tl-cell"></div><div class="tl-cell"></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
+        <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div>
       </div>
       <!-- Pieza integradora + video -->
       <div class="tl-row">
-        <div class="tl-label">Todo esto es OMG + Video<span class="sub">Síntesis · agosto</span></div>
+        <div class="tl-label">Todo esto es OMG + Video<span class="sub">Síntesis · octubre</span></div>
         <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-dot"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
       <!-- Graduación IOMG -->
       <div class="tl-row">
         <div class="tl-label">Graduación IOMG<span class="sub">Momento ancla</span></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-anchor"></div></div>
         <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
@@ -1290,7 +1284,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="tag">· Propuesta principal</div>
         <h3>Estudios de Caso RD</h3>
         <p>Una colección de casos empresariales reales documentados por OMG a partir de su experiencia directa acompañando empresas dominicanas. Cada caso describe lo que ocurrió, las decisiones que se tomaron y los resultados. Es lo que hemos aprendido en 25 años, devuelto al ecosistema en forma de conocimiento accesible. El corpus es abierto, crece con el tiempo y sirve como material de referencia para empresarios, consultores y académicos.</p>
-        <div class="cycle">Junio — Diciembre &nbsp;·&nbsp; +25 casos</div>
+        <div class="cycle">Julio — Diciembre &nbsp;·&nbsp; +25 casos</div>
       </div>
       <div class="legado-card">
         <div class="tag">· Opción alterna</div>
@@ -1313,7 +1307,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <div class="section-head">
       <div class="num">06 · Lanzamiento</div>
       <div>
-        <h2>11 de mayo. <span class="accent">El asset inaugural.</span></h2>
+        <h2>Julio. <span class="accent">El asset inaugural.</span></h2>
         
       </div>
     </div>
@@ -1364,29 +1358,14 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <p style="font-size: 16px; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 760px; font-weight: 500; margin-top: 32px;">Una pregunta sin respuesta como primer acto público invierte la posición habitual de <span class="omg-inline">OMG</span>. En vez de declarar lo que es o lo que ha construido, señala un vacío real en el ecosistema dominicano. El segundo slide revela que <span class="omg-inline">OMG</span> lleva 25 años cerca de ese vacío y está construyendo la respuesta. sin decir cuál es todavía. Establece desde el primer día que el aniversario mira hacia afuera, no hacia adentro, y que lo que viene es conocimiento producido desde la práctica, no celebración institucional.</p>
     </div>
 
-    <!-- Tagline · 6 opciones -->
+    <!-- Tagline · decisión tomada -->
     <div style="margin-top: 96px; padding: 56px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.015);">
-      <div class="eyebrow" style="margin-bottom: 36px;">Cinco taglines</div>
+      <div class="eyebrow" style="margin-bottom: 36px;">Tagline oficial · decisión de la directiva</div>
 
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 1060px;">
-        <div style="padding: 24px 28px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--yellow);">
-          <div style="font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años transformando conocimiento en valor para el país.</div>
-        </div>
-        <div style="padding: 24px 28px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--yellow);">
-          <div style="font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años donde el conocimiento se transforma en resultados.</div>
-        </div>
-        <div style="padding: 24px 28px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--yellow);">
-          <div style="font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años haciendo del conocimiento un motor de impacto.</div>
-        </div>
-        <div class="rec-tagline" style="padding: 28px 28px 24px 28px;">
-          <div style="font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años transformando posibilidades.</div>
-          <div class="rec-rationale">Más corta, ritmo de tres tiempos (igual que <em style="font-style: normal; color: var(--white); font-weight: 900;">O—Eme—Ge</em>), abre el campo semántico más allá del conocimiento y empata con el cierre “Transformando Nonetheless.”</div>
-        </div>
-        <div style="padding: 24px 28px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--yellow);">
-          <div style="font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años transformando conocimiento en impacto.</div>
-        </div>
-        <div style="padding: 24px 28px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--yellow);">
-          <div style="font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años de transformación.</div>
+      <div style="max-width: 1060px;">
+        <div class="rec-tagline decided" style="padding: 28px 28px 24px 28px;">
+          <div style="font-size: 26px; font-weight: 900; color: var(--white); letter-spacing: -0.005em;">25 años aprendiendo.</div>
+          <div class="rec-rationale">Elegida sobre las seis variantes evaluadas, a partir del concepto de aprendizaje integrado en la V2. Redacción final por confirmar en directiva.</div>
         </div>
       </div>
 
@@ -1401,7 +1380,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
           Make sense from the mess.<br>El crossword. El letter-grid.<br><span style="color: var(--yellow);">Lo que parece aleatorio tiene estructura cuando sabes verla.</span>
         </p>
         <p style="font-size: 17px; line-height: 1.62; color: rgba(255,255,255,0.7); font-weight: 500;">
-          Está en lo que hacemos y en lo que somos. La pieza síntesis del Layer 3, el video de agosto, y la opción B del lockup institucional son tres expresiones del mismo principio.
+          Está en lo que hacemos y en lo que somos. La pieza síntesis del Layer 3, el video de octubre, y la opción B del lockup institucional son tres expresiones del mismo principio.
         </p>
       </div>
       <div>
@@ -1486,7 +1465,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <p>Cada misidentificación se publica como su propio carrusel. setup, respuesta, cierre. Más frecuencia en el feed, más espacio tipográfico por idea.</p>
       </div>
     </div>
-    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-top: 28px; margin-bottom: 0; font-style: italic;">A continuación: primero la Ruta A en su simulador completo, luego prototipos de la Ruta B. La elección se documenta formalmente en la sección 12 · Decisiones requeridas.</p>
+    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-top: 28px; margin-bottom: 0; font-style: italic;">A continuación: primero la Ruta A en su simulador completo, luego prototipos de la Ruta B. La elección se documenta formalmente en la sección 12 · Decisiones.</p>
   </div>
 
   <!-- Carousel simulator -->
@@ -1519,7 +1498,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <div class="work-grid w-2up">
       <div class="piece-card">
         <div class="frame"><img alt="Cover A" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-022.jpg"></div>
-        <div class="caption"><span class="label">Variante A: pregunta directa</span></div>
+        <div class="caption"><span class="label">Variante A: titular declarativo</span></div>
       </div>
       <div class="piece-card">
         <div class="frame"><img alt="Cover B" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-013.jpg"></div>
@@ -1609,7 +1588,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       </div>
       <div style="padding: 40px 0; display: flex; flex-direction: column; justify-content: center;">
         <p style="font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); font-weight: 500; margin-bottom: 20px;">Las cuatro líneas implican cuatro disciplinas distintas. gobernanza (<em>directorio</em>), estructura (<em>estructuración</em>), legal (<em>contrato</em>), formativa (<em>siguiente generación</em>). pero ninguna se nombra. El lector las deduce.</p>
-        <p style="font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); font-weight: 500;">Tono documental, no celebratorio. La serie puede extenderse a 8 piezas durante julio–septiembre manteniendo el mismo patrón.</p>
+        <p style="font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); font-weight: 500;">Tono documental, no celebratorio. La serie puede extenderse a 8 piezas durante agosto–octubre manteniendo el mismo patrón.</p>
       </div>
     </div>
   </div>
@@ -1640,9 +1619,9 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       </div>
     </div>
 
-    <!-- Video de agosto · bloque conceptual -->
+    <!-- Video de octubre · bloque conceptual -->
     <div style="margin-top: 80px;">
-      <div class="eyebrow">Última semana de agosto</div>
+      <div class="eyebrow">Octubre</div>
       <h3 style="font-size: clamp(32px, 4.2vw, 60px); margin-bottom: 18px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.028em; line-height: 1;">Un video. <span style="color: var(--yellow);">Solo texto en movimiento y sonido.</span></h3>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 56px;">
@@ -1667,7 +1646,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <div style="margin-top: 96px; padding-top: 80px; border-top: 1px solid rgba(255,255,255,0.06);">
       <div class="eyebrow" style="margin-bottom: 24px;">Septiembre. El ancla del año.</div>
       <h3 style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 18px; max-width: 920px; color: var(--white); font-weight: 900; letter-spacing: -0.025em; line-height: 1;">La graduación de la primera promoción <span style="color: var(--yellow);">cierra el argumento.</span></h3>
-      <p style="font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 720px; font-weight: 500; margin-bottom: 64px;">El cuadrado amarillo del cronograma. La pieza que el sistema completo ha estado preparando desde mayo: 25 años de práctica acumulada produciendo, por primera vez, su propia evidencia humana.</p>
+      <p style="font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 720px; font-weight: 500; margin-bottom: 64px;">El cuadrado amarillo del cronograma. La pieza que el sistema completo ha estado preparando desde julio: 25 años de práctica acumulada produciendo, por primera vez, su propia evidencia humana.</p>
 
       <div class="work-grid w-feature">
         <div class="piece-card">
@@ -1860,9 +1839,9 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <section class="decisiones" id="decisiones">
   <div class="container">
     <div class="section-head">
-      <div class="num">12 · Decisiones requeridas</div>
+      <div class="num">12 · Decisiones</div>
       <div>
-        <h2>Tres decisiones para destrabar la ejecución. <span class="accent">Recomendación marcada en cada una.</span></h2>
+        <h2>Dos decisiones tomadas. <span class="accent">Cuatro por tomar.</span></h2>
       </div>
     </div>
 
@@ -1871,12 +1850,12 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="dec-num">01</div>
         <div class="dec-q">
           <h4>Tagline oficial de la campaña</h4>
-          <p>Cinco variantes evaluadas en la sección 05. La elegida firmará todas las piezas del año y aparecerá en el video síntesis de agosto.</p>
+          <p>Seis variantes evaluadas en la sección 06. La elegida firmará todas las piezas del año y aparecerá en el video síntesis de octubre.</p>
         </div>
         <div class="dec-rec">
-          <div class="rtag">★ Recomendación</div>
-          <div class="rtxt">“25 años transformando posibilidades.”</div>
-          <div class="rwhy">Más corta, ritmo de tres tiempos (igual que O—Eme—Ge), abre el campo semántico más allá del conocimiento y empata con el cierre “Transformando Nonetheless.”</div>
+          <div class="rtag">✓ Decisión tomada</div>
+          <div class="rtxt">“25 años aprendiendo.”</div>
+          <div class="rwhy">A partir del concepto de aprendizaje integrado en la V2. Redacción final por confirmar en directiva.</div>
         </div>
       </div>
 
@@ -1887,7 +1866,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
           <p>Estudios de Caso RD, Family Business o Anatomía de la Escala. Ver criterios en la sección 05.</p>
         </div>
         <div class="dec-rec">
-          <div class="rtag">★ Recomendación</div>
+          <div class="rtag">✓ Decisión tomada</div>
           <div class="rtxt">Estudios de Caso RD + Podcast LMG</div>
           <div class="rwhy">El único track que produce archivo perpetuo y audiencia recurrente. Family Business / Anatomía activables independientes en 2027.</div>
         </div>
@@ -1896,13 +1875,52 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <div class="dec-row">
         <div class="dec-num">03</div>
         <div class="dec-q">
-          <h4>Pieza inaugural del 11 de mayo</h4>
-          <p>“Acuse de recibo” (registro documental, compromiso institucional) o “La pregunta” (apertura interrogativa, mira hacia el ecosistema). Ambas se desarrollaron en la sección 06.</p>
+          <h4>Ruta de ejecución del Layer 1</h4>
+          <p>Carrusel único de 9 slides (Ruta A) o siete posts independientes de 3 slides (Ruta B). Ambas rutas se desarrollaron en la sección 07.</p>
         </div>
         <div class="dec-rec">
           <div class="rtag">★ Recomendación</div>
-          <div class="rtxt">“Acuse de recibo” el 11 de mayo</div>
-          <div class="rwhy">El registro formal abre el año con compromiso institucional; “La pregunta” se publica una semana después como pivot al Layer 1.</div>
+          <div class="rtxt">Ruta A · Carrusel único</div>
+          <div class="rwhy">Una sola pieza canon como referencia maestra del año. Nota: la pieza Academia pide publicarse cerca del egreso de septiembre — resolver cómo convive con el carrusel único.</div>
+        </div>
+      </div>
+
+      <div class="dec-row">
+        <div class="dec-num">04</div>
+        <div class="dec-q">
+          <h4>Fecha del lanzamiento</h4>
+          <p>El Acuse de Recibo promete respuesta. La fecha exacta de publicación debe acoplarse a la capacidad de cumplirla.</p>
+        </div>
+        <div class="dec-rec">
+          <div class="rtag">★ Recomendación</div>
+          <div class="rtxt">Acoplar al primer caso publicable</div>
+          <div class="rwhy">Publicar el Acuse la misma semana en que Estudios de Caso RD tenga su primer caso listo; “La pregunta” una semana después como pivot al Layer 1.</div>
+        </div>
+      </div>
+
+      <div class="dec-row">
+        <div class="dec-num">05</div>
+        <div class="dec-q">
+          <h4>Graduación IOMG</h4>
+          <p>El copy de Primeros Transformadores está definido. Falta decidir formato y timing: evento del ecosistema, pieza de feed, o ambos.</p>
+        </div>
+        <div class="dec-rec">
+          <div class="rtag">Pendiente</div>
+          <div class="rtxt">Formato y timing por definir</div>
+          <div class="rwhy">Momento ancla de septiembre; la pieza Academia del Layer 1 se coordina con esta decisión.</div>
+        </div>
+      </div>
+
+      <div class="dec-row">
+        <div class="dec-num">06</div>
+        <div class="dec-q">
+          <h4>Copy de la pieza Agencia</h4>
+          <p>El copy actual (“Producimos marcas y comunicación, sí. Pero antes diseñamos las decisiones que la marca tiene que comunicar.”) está en evaluación.</p>
+        </div>
+        <div class="dec-rec">
+          <div class="rtag">Pendiente</div>
+          <div class="rtxt">Validar o reescribir</div>
+          <div class="rwhy">Única misidentificación del Layer 1 sin copy aprobado; bloquea el cierre de la serie.</div>
         </div>
       </div>
     </div>
@@ -1912,7 +1930,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <!-- ══════ CIERRE ══════ -->
 <section class="closing" id="cierre">
   <img alt="OMG" class="big-logo" loading="eager" decoding="async" fetchpriority="high" width="1200" height="301" src="assets/img/img-001.png">
-  <h2><em>25 años aprendiendo a construir lo que todavía no tiene nombre.</em> <span class="omg-inline">OMG</span> <span class="accent">Difícil de definir. Transformando nonetheless.</span></h2>
+  <h2><em>25 años aprendiendo a construir lo que todavía no tiene nombre.</em> <span class="omg-inline">OMG</span><span class="accent">. Difícil de definir. Transformando nonetheless.</span></h2>
 
 </section>
 
