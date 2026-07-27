@@ -278,7 +278,7 @@ a { color: inherit; text-decoration: none; }
 .cronograma { background: var(--void); }
 .timeline {
   display: grid;
-  grid-template-columns: 280px repeat(6, 1fr);
+  grid-template-columns: 280px repeat(5, 1fr);
   gap: 0;
   margin-top: 72px;
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -334,7 +334,7 @@ a { color: inherit; text-decoration: none; }
   outline: 2px solid var(--yellow);
 }
 @media (max-width: 1000px) {
-  .timeline { grid-template-columns: 180px repeat(6, minmax(60px, 1fr)); overflow-x: auto; }
+  .timeline { grid-template-columns: 180px repeat(5, minmax(64px, 1fr)); overflow-x: auto; }
   .tl-row > .tl-label { font-size: 12px; padding: 16px 8px; }
 }
 
@@ -479,6 +479,24 @@ a { color: inherit; text-decoration: none; }
   color: rgba(7,7,9,0.55); margin-bottom: 32px; display: block;
 }
 .sig-option img { max-width: 960px; width: 100%; margin: 0 auto; display: block; }
+/* Chosen option — yellow frame + corner tab. Sits on --crudo, so the tab
+   inverts (void on yellow) instead of the dark-ground treatment used by
+   .legado-card.primary. */
+.sig-option.primary {
+  border: 2px solid var(--yellow);
+  padding: 58px;
+  position: relative;
+}
+.sig-option.primary::before {
+  content: '✓ Elegida';
+  position: absolute; top: 0; right: 0;
+  padding: 6px 12px;
+  background: var(--yellow); color: var(--void);
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 900;
+}
+.sig-option.primary .sig-label { color: var(--void); font-weight: 900; }
+.sig-option.alt { opacity: 0.55; }
+.sig-option.alt:hover { opacity: 1; transition: opacity .3s ease; }
 
 /* ─── LEGADO ───────────────────────────── */
 .legado { background: var(--void-2); }
@@ -710,7 +728,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 }
 .year-strip {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 4px;
   margin-bottom: 12px;
 }
@@ -727,7 +745,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 }
 .year-cell.anchor .dot { background: var(--void); }
 .year-labels {
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(5, 1fr);
   gap: 4px;
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
   font-weight: 500; color: var(--grey-dim); text-align: center;
@@ -751,17 +769,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   .resumen-shape { padding: 24px 20px; }
 }
 
-/* ─── RECOMMENDATION BADGE ──────────────────── */
-.rec-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 5px 10px;
-  background: var(--yellow); color: var(--void);
-  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-  font-weight: 900;
-  margin-bottom: 14px;
-}
-.rec-badge::before { content: '★'; font-size: 11px; }
-
+/* ─── RECOMMENDATION TREATMENTS ──────────────── */
 .rec-tagline {
   position: relative;
   background: rgba(255,209,0,0.08) !important;
@@ -995,10 +1003,69 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   /* Decision rows already responsive */
 }
 
+/* ─── ANEXO DE PRODUCCIÓN (plegable) ────────── */
+/* Collapse via grid-template-rows rather than display:none — hidden sections
+   must stay measurable so #sistema / #decisiones anchors keep working and the
+   scrollspy can still report a zero ratio for them. */
+/* The toggle's own padding is smaller than the fixed mobile bar (50px), so
+   anchor jumps need a margin to keep the eyebrow clear of it. */
+.prod-annex { border-top: 1px solid rgba(255,255,255,0.08); scroll-margin-top: 64px; }
+#sistema, #decisiones { scroll-margin-top: 64px; }
+.prod-toggle {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+  width: 100%; padding: 44px 0; background: none; border: 0; cursor: pointer;
+  font-family: var(--font); text-align: left; color: inherit;
+}
+.prod-toggle:hover .prod-title { color: var(--yellow); }
+.prod-toggle:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+.prod-toggle .prod-eyebrow {
+  grid-column: 1; display: inline-flex; align-items: center; gap: 14px;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 500; color: var(--grey); margin-bottom: 14px;
+}
+.prod-toggle .prod-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--yellow); }
+.prod-toggle .prod-title {
+  grid-column: 1; font-size: clamp(28px, 3.4vw, 44px); font-weight: 900;
+  color: var(--white); letter-spacing: -0.022em; line-height: 1.05;
+  transition: color .3s ease;
+}
+.prod-toggle .prod-hint {
+  grid-column: 1; margin-top: 14px; font-size: 15px; font-weight: 500;
+  color: rgba(255,255,255,0.6); line-height: 1.6; max-width: 640px;
+}
+.prod-toggle .prod-state {
+  grid-column: 2; grid-row: 1 / span 3; justify-self: end;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border: 1px solid var(--yellow); color: var(--yellow);
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 900;
+  white-space: nowrap;
+}
+.prod-annex.open .prod-toggle .prod-state { background: var(--yellow); color: var(--void); }
+.prod-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s ease; }
+.prod-body > .prod-inner { overflow: hidden; }
+.prod-annex.open .prod-body { grid-template-rows: 1fr; }
+/* Separator in the rail / mobile sheet */
+.rail-sep, .mnav-sep {
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 900; color: var(--grey-dim);
+}
+.rail-sep { padding: 14px 0 8px 34px; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 10px; }
+.mnav-sep { padding: 14px 20px 8px 20px; border-top: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
+@media (prefers-reduced-motion: reduce) { .prod-body { transition: none; } }
+@media (max-width: 900px) {
+  .prod-toggle { grid-template-columns: 1fr; padding: 32px 0; }
+  .prod-toggle .prod-state { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 20px; }
+}
+
 /* ─── PRINT  ────────────────────────────────── */
 @media print {
   .rail, .mnav, .topbar { display: none !important; }
   body { background: white; color: black; }
+  /* Always print the annex, whatever its on-screen state. */
+  .prod-body { grid-template-rows: 1fr !important; }
+  .prod-body > .prod-inner { overflow: visible !important; }
+  .prod-toggle .prod-state { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
 
 </style>
@@ -1008,7 +1075,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <!-- Top bar (desktop) -->
 <div class="topbar">
   <div class="brand">Propuesta de campaña · OMG 25</div>
-  <div>v3.0 · Julio 2026</div>
+  <div>v3.1 · Julio 2026</div>
 </div>
 
 <!-- Mobile nav (≤1100px) -->
@@ -1028,14 +1095,15 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <a href="#intro"><span class="mnum">03</span><span>El argumento</span></a>
     <a href="#familia"><span class="mnum">04</span><span>Por qué solo OMG</span></a>
     <a href="#legado"><span class="mnum">05</span><span>Legado</span></a>
-    <a href="#lanzamiento"><span class="mnum">06</span><span>Lanzamiento · Julio</span></a>
+    <a href="#lanzamiento"><span class="mnum">06</span><span>Lanzamiento · Agosto</span></a>
     <a href="#layer1"><span class="mnum">07</span><span>Layer 1 — El malentendido</span></a>
     <a href="#layer2"><span class="mnum">08</span><span>Layer 2 — Presencia silenciosa</span></a>
     <a href="#layer3"><span class="mnum">09</span><span>Layer 3 — Definición imposible</span></a>
     <a href="#complementarias"><span class="mnum">10</span><span>Series complementarias</span></a>
     <a href="#adapt"><span class="mnum">11</span><span>Adaptaciones</span></a>
-    <a href="#decisiones"><span class="mnum">12</span><span>Decisiones</span></a>
-    <a href="#sistema"><span class="mnum">13</span><span>Sistema visual</span></a>
+    <div class="mnav-sep">Anexo · Producción</div>
+    <a href="#sistema"><span class="mnum">12</span><span>Sistema visual</span></a>
+    <a href="#decisiones"><span class="mnum">13</span><span>Decisiones</span></a>
     <a href="#cierre"><span class="mnum">14</span><span>Cierre</span></a>
   </div>
 </nav>
@@ -1056,11 +1124,12 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <a href="#layer3" data-rail><span class="rn">09</span><span>Layer 3 — Definición</span></a>
     <a href="#complementarias" data-rail><span class="rn">10</span><span>Complementarias</span></a>
     <a href="#adapt" data-rail><span class="rn">11</span><span>Adaptaciones</span></a>
-    <a href="#decisiones" data-rail><span class="rn">12</span><span>Decisiones</span></a>
-    <a href="#sistema" data-rail><span class="rn">13</span><span>Sistema visual</span></a>
+    <div class="rail-sep">Anexo · Producción</div>
+    <a href="#sistema" data-rail><span class="rn">12</span><span>Sistema visual</span></a>
+    <a href="#decisiones" data-rail><span class="rn">13</span><span>Decisiones</span></a>
     <a href="#cierre" data-rail><span class="rn">14</span><span>Cierre</span></a>
   </div>
-  <div class="rail-foot">15 secciones · <strong>Julio–Dic 2026</strong></div>
+  <div class="rail-foot">15 secciones · <strong>Ago–Dic 2026</strong></div>
 </aside>
 
 <!-- (legacy dot nav removed — replaced by progress rail above) -->
@@ -1071,7 +1140,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <!-- ══════ HERO (00) ══════ -->
 <section class="hero" id="hero">
   <div class="hero-left">
-    <div class="eyebrow">Propuesta de campaña, julio–dic 2026</div>
+    <div class="eyebrow">Propuesta de campaña, agosto–dic 2026</div>
     <h1><em style="font-style:normal; color:var(--white)">OMG</em><br><span class="accent">25 Aniversario.</span></h1>
   </div>
   <div class="hero-right">
@@ -1097,7 +1166,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="rcard">
           <div class="rtag">La estructura</div>
           <div class="rval">3 <span class="accent">Layers</span></div>
-          <div class="rdesc">Layer 1: el malentendido (jul–sep). Layer 2: la presencia silenciosa (ago–oct). Layer 3: la definición imposible (sep–oct).</div>
+          <div class="rdesc">Layer 1: el malentendido (ago–oct). Layer 2: la presencia silenciosa (sep–nov). Layer 3: la definición imposible (oct–nov).</div>
         </div>
         <div class="rcard">
           <div class="rtag">El legado</div>
@@ -1107,24 +1176,23 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       </div>
 
       <div class="resumen-shape">
-        <div class="stitle"><span>Forma del año</span><span class="right">Julio → Diciembre 2026</span></div>
+        <div class="stitle"><span>Forma del año</span><span class="right">Agosto → Diciembre 2026</span></div>
         <div class="year-strip">
           <div class="year-cell has-event"><div class="dot"></div></div>
-          <div class="year-cell has-event"></div>
           <div class="year-cell anchor"><div class="dot"></div></div>
-          <div class="year-cell has-event"><div class="dot"></div></div>
           <div class="year-cell has-event"></div>
+          <div class="year-cell has-event"><div class="dot"></div></div>
           <div class="year-cell has-event"></div>
         </div>
         <div class="year-labels">
-          <span>Jul</span><span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dic</span>
+          <span>Ago</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dic</span>
         </div>
         <div class="year-events">
-          <span><strong>Jul</strong> · Lanzamiento</span>
-          <span><strong>Jul</strong> · Estudios de Caso RD</span>
-          <span><strong>Ago</strong> · Podcast LMG</span>
+          <span><strong>Ago</strong> · Lanzamiento</span>
+          <span><strong>Ago</strong> · Estudios de Caso RD</span>
+          <span><strong>Sep</strong> · Podcast LMG</span>
           <span><em>Sep</em> · Graduación IOMG · momento ancla</span>
-          <span><strong>Oct</strong> · Síntesis + video</span>
+          <span><strong>Nov</strong> · Síntesis + video</span>
           <span><strong>Dic</strong> · Cierre</span>
         </div>
       </div>
@@ -1132,7 +1200,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <div style="margin-top: 56px; display: flex; gap: 32px; flex-wrap: wrap; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; color: var(--grey-dim);">
         <span>↓ Continúa para el desglose completo</span>
         <span>·</span>
-        <a href="#decisiones" style="color: var(--yellow); font-weight: 900;">→ Saltar a decisiones (12)</a>
+        <a href="#decisiones" style="color: var(--yellow); font-weight: 900;">→ Saltar a decisiones (13)</a>
       </div>
     </div>
   </div>
@@ -1148,73 +1216,70 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <!-- header row -->
       <div class="tl-header">
         <div>Iniciativa</div>
-        <div>Jul</div><div>Ago</div><div>Sep</div>
-        <div>Oct</div><div>Nov</div><div>Dic</div>
+        <div>Ago</div><div>Sep</div><div>Oct</div>
+        <div>Nov</div><div>Dic</div>
       </div>
-      <!-- Lanzamiento -->
+      <!-- Lanzamiento · Ago -->
       <div class="tl-row">
-        <div class="tl-label">Lanzamiento<span class="sub">Julio</span></div>
+        <div class="tl-label">Lanzamiento<span class="sub">Agosto</span></div>
         <div class="tl-cell"><div class="tl-dot"></div></div>
         <div class="tl-cell"></div><div class="tl-cell"></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
-      <!-- Nos han llamado -->
+      <!-- Nos han llamado · ago–oct -->
       <div class="tl-row">
         <div class="tl-label">Nos han llamado…<span class="sub">Layer 1 · 7 + remate</span></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
-      <!-- Estudios de Caso RD -->
+      <!-- Estudios de Caso RD · ago–dic -->
       <div class="tl-row">
         <div class="tl-label">Estudios de Caso RD<span class="sub">Legado · publicación</span></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
       </div>
-      <!-- Emisora LMG -->
+      <!-- Emisora LMG · sep–dic -->
       <div class="tl-row">
         <div class="tl-label">Emisora LMG<span class="sub">Podcast · 1ra temporada</span></div>
         <div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
-        <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
       </div>
-      <!-- Estuvimos ahí -->
+      <!-- Estuvimos ahí · sep–nov -->
       <div class="tl-row">
         <div class="tl-label">Estuvimos ahí<span class="sub">Layer 2 · ~8 piezas</span></div>
         <div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div>
       </div>
-      <!-- Así nos describió -->
+      <!-- Así nos describió · oct–dic -->
       <div class="tl-row">
         <div class="tl-label">Así nos describió<span class="sub">Complementaria · ~8 piezas</span></div>
         <div class="tl-cell"></div><div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-bar start-mid"></div></div>
         <div class="tl-cell"><div class="tl-bar"></div></div>
         <div class="tl-cell"><div class="tl-bar end-mid"></div></div>
-        <div class="tl-cell"></div>
       </div>
-      <!-- Pieza integradora + video -->
+      <!-- Pieza integradora + video · Nov -->
       <div class="tl-row">
-        <div class="tl-label">Todo esto es OMG + Video<span class="sub">Síntesis · octubre</span></div>
+        <div class="tl-label">Todo esto es OMG + Video<span class="sub">Síntesis · noviembre</span></div>
         <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-dot"></div></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div>
       </div>
-      <!-- Graduación IOMG -->
+      <!-- Graduación IOMG · Sep (fecha fija, no se desplaza) -->
       <div class="tl-row">
         <div class="tl-label">Graduación IOMG<span class="sub">Momento ancla</span></div>
-        <div class="tl-cell"></div><div class="tl-cell"></div>
+        <div class="tl-cell"></div>
         <div class="tl-cell"><div class="tl-anchor"></div></div>
         <div class="tl-cell"></div><div class="tl-cell"></div><div class="tl-cell"></div>
       </div>
@@ -1284,7 +1349,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="tag">· Propuesta principal</div>
         <h3>Estudios de Caso RD</h3>
         <p>Una colección de casos empresariales reales documentados por OMG a partir de su experiencia directa acompañando empresas dominicanas. Cada caso describe lo que ocurrió, las decisiones que se tomaron y los resultados. Es lo que hemos aprendido en 25 años, devuelto al ecosistema en forma de conocimiento accesible. El corpus es abierto, crece con el tiempo y sirve como material de referencia para empresarios, consultores y académicos.</p>
-        <div class="cycle">Julio — Diciembre &nbsp;·&nbsp; +25 casos</div>
+        <div class="cycle">Agosto — Diciembre &nbsp;·&nbsp; +25 casos</div>
       </div>
       <div class="legado-card">
         <div class="tag">· Opción alterna</div>
@@ -1307,7 +1372,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <div class="section-head">
       <div class="num">06 · Lanzamiento</div>
       <div>
-        <h2>Julio. <span class="accent">El asset inaugural.</span></h2>
+        <h2>Agosto. <span class="accent">El asset inaugural.</span></h2>
         
       </div>
     </div>
@@ -1380,7 +1445,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
           Make sense from the mess.<br>El crossword. El letter-grid.<br><span style="color: var(--yellow);">Lo que parece aleatorio tiene estructura cuando sabes verla.</span>
         </p>
         <p style="font-size: 17px; line-height: 1.62; color: rgba(255,255,255,0.7); font-weight: 500;">
-          Está en lo que hacemos y en lo que somos. La pieza síntesis del Layer 3, el video de octubre, y la opción B del lockup institucional son tres expresiones del mismo principio.
+          Está en lo que hacemos y en lo que somos. La pieza síntesis del Layer 3, el video de noviembre, y la opción A del lockup institucional son tres expresiones del mismo principio.
         </p>
       </div>
       <div>
@@ -1393,17 +1458,22 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <div class="eyebrow">Firma de email y banner</div>
       
 
-      <div class="sig-option">
-        <div class="sig-label">Opción A · Lockup con grid de letras — versión propuesta</div>
+      <div class="sig-option primary">
+        <div class="sig-label">Opción A · Lockup con grid de letras</div>
         <img alt="Lockup con grid" loading="lazy" decoding="async" width="1200" height="255" src="assets/img/img-008.jpg">
       </div>
 
-      <div class="sig-option">
-        <div class="sig-label">Opción B · Firma horizontal — Lockup OMG + 25</div>
+      <div class="sig-option alt">
+        <div class="sig-label">Opción B · Firma horizontal — alterna descartada</div>
         <img alt="Firma horizontal" loading="lazy" decoding="async" width="1400" height="350" src="assets/img/img-009.jpg">
       </div>
 
       <p style="margin-top: 32px; font-size: 15px; color: rgba(255,255,255,0.62); font-weight: 500; line-height: 1.6; max-width: 720px; font-style: italic;">Nota: la Opción A usa el dispositivo conceptual del crossword. letras en grid donde <span class="omg-inline">OMG</span> emerge en amarillo. Lo aleatorio tiene estructura cuando sabes verla. Misma lógica que estructura el argumento de la campaña entera. Posible recurrencia limitada solo a este uso institucional, no como motivo de feed.</p>
+
+      <div style="margin-top: 24px; padding: 20px 24px; border-left: 3px solid var(--yellow); background: rgba(255,209,0,0.06); max-width: 720px;">
+        <div style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 900; color: var(--yellow); margin-bottom: 10px;">Nota de producción</div>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.72); font-weight: 500; line-height: 1.6;">El arte mostrado arriba todavía lleva la tagline anterior <em style="font-style: normal; color: var(--white); font-weight: 900;">“25 años Transformando Posibilidades”</em>. Debe re-renderizarse con la tagline definitiva <em style="font-style: normal; color: var(--white); font-weight: 900;">“25 años aprendiendo.”</em> antes de producción. La alterna descartada además tiene fechada <em style="font-style: normal; color: var(--white); font-weight: 900;">11 mayo 2026</em>, previa al recronograma.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1449,69 +1519,30 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   </div>
 
   
-  <!-- Dos rutas · framing (moved before carousel) -->
+  <!-- Dos rutas · framing (Ruta B decidida; ver sección 13) -->
   <div class="container" style="margin-top: 80px; margin-bottom: 0; padding-top: 64px; padding-bottom: 8px; border-top: 1px solid rgba(255,255,255,0.08);">
-    <div class="eyebrow" style="margin-bottom: 24px;">Dos rutas, una decisión</div>
-    <h3 style="font-size: clamp(28px, 3.6vw, 48px); margin-bottom: 32px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.022em; line-height: 1.05;">El Layer 1 puede ejecutarse de dos maneras. <span style="color: var(--yellow);">Recomendamos la primera.</span></h3>
+    <div class="eyebrow" style="margin-bottom: 24px;">Dos rutas, una decisión tomada</div>
+    <h3 style="font-size: clamp(28px, 3.6vw, 48px); margin-bottom: 32px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.022em; line-height: 1.05;">El Layer 1 puede ejecutarse de dos maneras. <span style="color: var(--yellow);">Ejecutamos la Ruta B.</span></h3>
     <div class="route-pick">
       <div class="route-card primary">
-        <div class="rhead">★ Recomendación · Ruta A</div>
-        <h4>Carrusel único de 9 slides</h4>
-        <p>Portada, siete misidentificaciones, remate. todo en un solo post. Lectura continua, alto compromiso de scroll, una sola pieza canon que pueda usarse como referencia maestra del año.</p>
+        <div class="rhead">✓ Decisión tomada · Ruta B</div>
+        <h4>Siete posts independientes · 3 slides cada uno</h4>
+        <p>Cada misidentificación se publica como su propio carrusel. setup, respuesta, cierre. Más frecuencia en el feed, más espacio tipográfico por idea, y cada pieza se agenda por separado.</p>
       </div>
       <div class="route-card">
-        <div class="rhead">Ruta B · Alterna</div>
-        <h4>Siete posts independientes · 3 slides cada uno</h4>
-        <p>Cada misidentificación se publica como su propio carrusel. setup, respuesta, cierre. Más frecuencia en el feed, más espacio tipográfico por idea.</p>
+        <div class="rhead">Ruta A · Alterna documentada</div>
+        <h4>Carrusel único de 9 slides</h4>
+        <p>Portada, siete misidentificaciones, remate. todo en un solo post. Lectura continua y una sola pieza canon, pero sin margen para escalonar la publicación.</p>
       </div>
     </div>
-    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-top: 28px; margin-bottom: 0; font-style: italic;">A continuación: primero la Ruta A en su simulador completo, luego prototipos de la Ruta B. La elección se documenta formalmente en la sección 12 · Decisiones.</p>
+    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-top: 28px; margin-bottom: 0; font-style: italic;">A continuación: primero los prototipos de la Ruta B, la ruta elegida. Después la Ruta A en su simulador completo, que se conserva como referencia. La decisión se registra en la sección 13 · Decisiones.</p>
   </div>
 
-  <!-- Carousel simulator -->
-  <div class="carousel-simulator">
-    <div style="padding: 0 48px; margin-bottom: 40px;">
-      <div class="eyebrow">Carrusel completo</div>
-      <p style="font-size: 16px; max-width: 640px; color: rgba(255,255,255,0.75); font-weight: 500; line-height: 1.6;">Portada, siete misidentificaciones, remate. Desliza horizontalmente para ver la serie completa.</p>
-    </div>
-    <div class="carousel-scroll">
-      <div class="carousel-slide"><img alt="Cover" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-013.jpg"></div>
-      <div class="carousel-slide"><img alt="Consultora" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-014.jpg"></div>
-      <div class="carousel-slide"><img alt="ONG" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-015.jpg"></div>
-      <div class="carousel-slide"><img alt="Academia" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-016.jpg"></div>
-      <div class="carousel-slide"><img alt="Oficina Melo Guerrero" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-017.jpg"></div>
-      <div class="carousel-slide"><img alt="Agencia" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-018.jpg"></div>
-      <div class="carousel-slide"><img alt="Abogados" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-019.jpg"></div>
-      <div class="carousel-slide"><img alt="Jóvenes" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-020.jpg"></div>
-      <div class="carousel-slide"><img alt="Remate" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-021.jpg"></div>
-    </div>
-    <div class="carousel-hint">
-      <span>← → Desliza para explorar</span>
-      <span>9 slides</span>
-    </div>
-  </div>
-
-  <div class="container" style="margin-top: 80px;">
-    <div class="eyebrow">Variante de portada</div>
-    
-
-    <div class="work-grid w-2up">
-      <div class="piece-card">
-        <div class="frame"><img alt="Cover A" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-022.jpg"></div>
-        <div class="caption"><span class="label">Variante A: titular declarativo</span></div>
-      </div>
-      <div class="piece-card">
-        <div class="frame"><img alt="Cover B" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-013.jpg"></div>
-        <div class="caption"><span class="label">Variante B: gradiente</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Ruta B · Prototipos (tres ejemplos de los siete posts independientes) -->
-  <div class="container" style="margin-top: 96px; padding-top: 64px; border-top: 1px solid rgba(255,255,255,0.08);">
+  <!-- Ruta B · Prototipos (dos ejemplos de los siete posts independientes) -->
+  <div class="container" style="margin-top: 64px;">
     <div class="eyebrow" style="margin-bottom: 24px;">Prototipos de Ruta B</div>
-    <h3 style="font-size: clamp(24px, 2.8vw, 36px); margin-bottom: 16px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.018em; line-height: 1.1;">Tres ejemplos de los siete posts independientes.</h3>
-    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-bottom: 64px;">Si la dirección elige la Ruta B, así se vería cada misidentificación: setup, respuesta, cierre. un carrusel autónomo por categoría.</p>
+    <h3 style="font-size: clamp(24px, 2.8vw, 36px); margin-bottom: 16px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.018em; line-height: 1.1;">Dos ejemplos de los siete posts independientes.</h3>
+    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-bottom: 64px;">Así se ejecuta cada misidentificación: setup, respuesta, cierre. un carrusel autónomo por categoría.</p>
 
     <!-- Academia prototype -->
     <div style="margin-bottom: 80px;">
@@ -1558,7 +1589,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     </div>
 
     <div class="notes-block">
-      <div class="notes-title">Notas sobre la opción alterna</div>
+      <div class="notes-title">Notas sobre la ruta elegida</div>
       <div class="annotation">
         <div class="n">·</div>
         <p>Las siete misidentificaciones se publican en posts independientes. consultora, ONG, academia, Oficina Melo Guerrero, agencia, abogados, jóvenes. El remate del carrusel largo no aplica aquí: cada post ya cierra con su propia slide 3.</p>
@@ -1566,6 +1597,51 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <div class="annotation">
         <div class="n">·</div>
         <p>La slide 3 funciona como firma argumental. <strong><span class="omg-inline">OMG</span></strong> gigante en amarillo, con la categoría descartada como sublínea. Cierra el loop sin redundancia textual.</p>
+      </div>
+      <div class="annotation">
+        <div class="n">·</div>
+        <p>Publicar por separado resuelve el calendario: la pieza <strong>academia</strong> puede esperar al egreso de septiembre sin retener las otras seis.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ruta A · alterna documentada (carrusel único + variantes de portada) -->
+  <div class="container" style="margin-top: 96px; padding-top: 64px; border-top: 1px solid rgba(255,255,255,0.08);">
+    <div class="eyebrow" style="margin-bottom: 24px;">Ruta A · alterna documentada</div>
+    <h3 style="font-size: clamp(24px, 2.8vw, 36px); margin-bottom: 16px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.018em; line-height: 1.1;">El carrusel único de 9 slides.</h3>
+    <p style="font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.6); max-width: 740px; font-weight: 500; margin-bottom: 0;">Se conserva documentado como referencia: portada, siete misidentificaciones y remate en un solo post. Desliza horizontalmente para ver la serie completa.</p>
+  </div>
+
+  <!-- Carousel simulator -->
+  <div class="carousel-simulator">
+    <div class="carousel-scroll">
+      <div class="carousel-slide"><img alt="Cover" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-013.jpg"></div>
+      <div class="carousel-slide"><img alt="Consultora" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-014.jpg"></div>
+      <div class="carousel-slide"><img alt="ONG" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-015.jpg"></div>
+      <div class="carousel-slide"><img alt="Academia" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-016.jpg"></div>
+      <div class="carousel-slide"><img alt="Oficina Melo Guerrero" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-017.jpg"></div>
+      <div class="carousel-slide"><img alt="Agencia" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-018.jpg"></div>
+      <div class="carousel-slide"><img alt="Abogados" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-019.jpg"></div>
+      <div class="carousel-slide"><img alt="Jóvenes" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-020.jpg"></div>
+      <div class="carousel-slide"><img alt="Remate" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-021.jpg"></div>
+    </div>
+    <div class="carousel-hint">
+      <span>← → Desliza para explorar</span>
+      <span>9 slides</span>
+    </div>
+  </div>
+
+  <div class="container" style="margin-top: 80px;">
+    <div class="eyebrow">Variante de portada</div>
+
+    <div class="work-grid w-2up">
+      <div class="piece-card">
+        <div class="frame"><img alt="Cover A" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-022.jpg"></div>
+        <div class="caption"><span class="label">Variante A: titular declarativo</span></div>
+      </div>
+      <div class="piece-card">
+        <div class="frame"><img alt="Cover B" loading="lazy" decoding="async" width="1400" height="1750" src="assets/img/img-013.jpg"></div>
+        <div class="caption"><span class="label">Variante B: gradiente</span></div>
       </div>
     </div>
   </div>
@@ -1588,7 +1664,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       </div>
       <div style="padding: 40px 0; display: flex; flex-direction: column; justify-content: center;">
         <p style="font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); font-weight: 500; margin-bottom: 20px;">Las cuatro líneas implican cuatro disciplinas distintas. gobernanza (<em>directorio</em>), estructura (<em>estructuración</em>), legal (<em>contrato</em>), formativa (<em>siguiente generación</em>). pero ninguna se nombra. El lector las deduce.</p>
-        <p style="font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); font-weight: 500;">Tono documental, no celebratorio. La serie puede extenderse a 8 piezas durante agosto–octubre manteniendo el mismo patrón.</p>
+        <p style="font-size: 17px; line-height: 1.65; color: rgba(255,255,255,0.82); font-weight: 500;">Tono documental, no celebratorio. La serie puede extenderse a 8 piezas durante septiembre–noviembre manteniendo el mismo patrón.</p>
       </div>
     </div>
   </div>
@@ -1619,9 +1695,9 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       </div>
     </div>
 
-    <!-- Video de octubre · bloque conceptual -->
+    <!-- Video de noviembre · bloque conceptual -->
     <div style="margin-top: 80px;">
-      <div class="eyebrow">Octubre</div>
+      <div class="eyebrow">Noviembre</div>
       <h3 style="font-size: clamp(32px, 4.2vw, 60px); margin-bottom: 18px; max-width: 940px; color: var(--white); font-weight: 900; letter-spacing: -0.028em; line-height: 1;">Un video. <span style="color: var(--yellow);">Solo texto en movimiento y sonido.</span></h3>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 56px;">
@@ -1646,7 +1722,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
     <div style="margin-top: 96px; padding-top: 80px; border-top: 1px solid rgba(255,255,255,0.06);">
       <div class="eyebrow" style="margin-bottom: 24px;">Septiembre. El ancla del año.</div>
       <h3 style="font-size: clamp(32px, 4vw, 56px); margin-bottom: 18px; max-width: 920px; color: var(--white); font-weight: 900; letter-spacing: -0.025em; line-height: 1;">La graduación de la primera promoción <span style="color: var(--yellow);">cierra el argumento.</span></h3>
-      <p style="font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 720px; font-weight: 500; margin-bottom: 64px;">El cuadrado amarillo del cronograma. La pieza que el sistema completo ha estado preparando desde julio: 25 años de práctica acumulada produciendo, por primera vez, su propia evidencia humana.</p>
+      <p style="font-size: 18px; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 720px; font-weight: 500; margin-bottom: 64px;">El cuadrado amarillo del cronograma. La pieza que el sistema completo ha estado preparando desde agosto: 25 años de práctica acumulada produciendo, por primera vez, su propia evidencia humana.</p>
 
       <div class="work-grid w-feature">
         <div class="piece-card">
@@ -1680,8 +1756,6 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       <div style="padding: 40px 0; display: flex; flex-direction: column; justify-content: center;">
         <p style="font-size: 17px; line-height: 1.65; color: rgba(7,7,9,0.78); font-weight: 500; margin-bottom: 20px;">El copy de la pieza es placeholder. La curación de voces reales (clientes, profesores, periodistas, empresarios) es la decisión editorial más importante de esta serie. determina si las piezas se leen como testimoniales genuinos o como marketing.</p>
       </div>
-    </div>
-
     </div>
   </div>
 </section>
@@ -1751,11 +1825,25 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   </div>
 </section>
 
+<!-- ══════ ANEXO DE PRODUCCIÓN (12 · Sistema visual + 13 · Decisiones) ══════ -->
+<div class="prod-annex" id="produccion">
+  <div class="container" style="padding: 0 48px;">
+    <button class="prod-toggle" id="prodToggle" aria-expanded="false" aria-controls="prodBody">
+      <span class="prod-eyebrow">Anexo · Producción</span>
+      <span class="prod-title">Sistema visual y decisiones</span>
+      <span class="prod-hint">Especificación de color, tipografía y construcción, más el registro de decisiones. Material de referencia para el equipo de producción.</span>
+      <span class="prod-state" id="prodState">Ver anexo</span>
+    </button>
+  </div>
+
+  <div class="prod-body" id="prodBody">
+   <div class="prod-inner">
+
 <!-- ══════ EL SISTEMA ══════ -->
 <section class="system" id="sistema">
   <div class="container">
 
-    <div class="eyebrow">El sistema visual</div>
+    <div class="eyebrow">12 · Sistema visual</div>
     
 
     <div class="system-grid">
@@ -1839,9 +1927,9 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
 <section class="decisiones" id="decisiones">
   <div class="container">
     <div class="section-head">
-      <div class="num">12 · Decisiones</div>
+      <div class="num">13 · Decisiones</div>
       <div>
-        <h2>Dos decisiones tomadas. <span class="accent">Cuatro por tomar.</span></h2>
+        <h2>Tres decisiones tomadas. <span class="accent">Tres por tomar.</span></h2>
       </div>
     </div>
 
@@ -1850,7 +1938,7 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
         <div class="dec-num">01</div>
         <div class="dec-q">
           <h4>Tagline oficial de la campaña</h4>
-          <p>Seis variantes evaluadas en la sección 06. La elegida firmará todas las piezas del año y aparecerá en el video síntesis de octubre.</p>
+          <p>Seis variantes evaluadas en la sección 06. La elegida firmará todas las piezas del año y aparecerá en el video síntesis de noviembre.</p>
         </div>
         <div class="dec-rec">
           <div class="rtag">✓ Decisión tomada</div>
@@ -1879,9 +1967,9 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
           <p>Carrusel único de 9 slides (Ruta A) o siete posts independientes de 3 slides (Ruta B). Ambas rutas se desarrollaron en la sección 07.</p>
         </div>
         <div class="dec-rec">
-          <div class="rtag">★ Recomendación</div>
-          <div class="rtxt">Ruta A · Carrusel único</div>
-          <div class="rwhy">Una sola pieza canon como referencia maestra del año. Nota: la pieza Academia pide publicarse cerca del egreso de septiembre — resolver cómo convive con el carrusel único.</div>
+          <div class="rtag">✓ Decisión tomada</div>
+          <div class="rtxt">Ruta B · Siete posts independientes</div>
+          <div class="rwhy">Más frecuencia en el feed y más espacio tipográfico por idea. Resuelve además el calendario: la pieza Academia puede publicarse cerca del egreso de septiembre sin retener las otras seis, que es lo que el carrusel único obligaba. La Ruta A queda documentada como alterna.</div>
         </div>
       </div>
 
@@ -1927,6 +2015,11 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
   </div>
 </section>
 
+   </div>
+  </div>
+</div>
+<!-- ══════ /ANEXO DE PRODUCCIÓN ══════ -->
+
 <!-- ══════ CIERRE ══════ -->
 <section class="closing" id="cierre">
   <img alt="OMG" class="big-logo" loading="eager" decoding="async" fetchpriority="high" width="1200" height="301" src="assets/img/img-001.png">
@@ -1948,7 +2041,10 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       }
     });
   }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
-  document.querySelectorAll('section:not(#hero), .pull-quote, .carousel-simulator').forEach(el => {
+  // The annex sections are excluded: while collapsed they have zero height, and
+  // with threshold:0 that still counts as intersecting — they'd burn their reveal
+  // at load and then be stuck at opacity:0 when the annex is expanded.
+  document.querySelectorAll('section:not(#hero):not(#sistema):not(#decisiones), .pull-quote, .carousel-simulator').forEach(el => {
     el.classList.add('reveal'); reveal.observe(el);
   });
 
@@ -2036,6 +2132,58 @@ footer .yellow-dot { display: inline-block; width: 6px; height: 6px; background:
       mnavSheet.classList.remove('open');
       mnavToggle.textContent = 'Índice';
     }));
+  }
+
+  // ─── Anexo de producción (plegable) ───
+  const annex = document.getElementById('produccion');
+  const annexToggle = document.getElementById('prodToggle');
+  const annexState = document.getElementById('prodState');
+  // Hashes that live inside the annex and must open it before scrolling.
+  const ANNEX_IDS = ['produccion', 'sistema', 'decisiones'];
+
+  function setAnnex(open) {
+    if (!annex) return;
+    annex.classList.toggle('open', open);
+    if (annexToggle) annexToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (annexState) annexState.textContent = open ? 'Ocultar anexo' : 'Ver anexo';
+    // Collapsing fires neither scroll nor resize, so the mobile progress bar
+    // would keep a stale percentage until the next scroll.
+    updateProgress();
+  }
+
+  if (annex && annexToggle) {
+    annexToggle.addEventListener('click', () => setAnnex(!annex.classList.contains('open')));
+
+    // Any in-page link pointing into the annex — rail, mobile sheet, and the
+    // "Saltar a decisiones" CTA in the resumen — opens it, then scrolls.
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      if (!ANNEX_IDS.includes(id)) return;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        setAnnex(true);
+        const target = document.getElementById(id);
+        // Next frame, so the grid-rows transition has laid the content out.
+        requestAnimationFrame(() => {
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + id);
+        });
+      });
+    });
+
+    // Deep links: …/index.html#produccion opens the annex on load. The file had
+    // no hash handling at all before this.
+    function handleHash() {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (!ANNEX_IDS.includes(id)) return;
+      setAnnex(true);
+      const target = document.getElementById(id);
+      requestAnimationFrame(() => {
+        if (target) target.scrollIntoView({ block: 'start' });
+      });
+    }
+    window.addEventListener('hashchange', handleHash);
+    handleHash();
   }
 </script>
 
